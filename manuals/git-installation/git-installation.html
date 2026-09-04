@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>git-installation.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> or <div class="page"></div> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="установка-системы-контроля-версий-git">Установка системы контроля версий Git</h1>
+<h2 id="что-такое-git-и-зачем-он-нужен">Что такое Git и зачем он нужен</h2>
+<p><strong>Git</strong> — это распределённая система контроля версий. Она позволяет сохранять историю изменений проекта, откатываться к предыдущим состояниям, вести работу в нескольких ветках и синхронизировать код с удалёнными репозиториями (например, на GitHub или GitLab).</p>
+<p>Для прохождения курса Git понадобится, чтобы получать учебные материалы, сдавать домашние задания и работать с общим репозиторием.</p>
+<h2 id="требования-к-версии">Требования к версии</h2>
+<p>Подойдёт любая версия Git <strong>не ниже 2.30</strong>. Рекомендуется устанавливать последнюю стабильную версию.</p>
+<p>Проверить установленную версию можно командой:</p>
+<pre class="hljs"><code><div>git --version
+</div></code></pre>
+<p>В выводе должно быть, например, <code>git version 2.45.1</code> или выше. Если команда не распознаётся — Git не установлен либо не добавлен в <code>PATH</code> (см. раздел <a href="#%D1%87%D0%B0%D1%81%D1%82%D1%8B%D0%B5-%D0%BF%D1%80%D0%BE%D0%B1%D0%BB%D0%B5%D0%BC%D1%8B">Частые проблемы</a>).</p>
+<hr>
+<h2 id="windows">Windows</h2>
+<ol>
+<li>
+<p>Откройте официальный сайт <a href="https://git-scm.com/download/win">git-scm.com/download/win</a>. Через несколько секунд загрузка должна начаться автоматически.</p>
+<p>Если этого не произошло (заблокировал браузер, отключён JavaScript, сработал блокировщик рекламы), скачайте установщик вручную одним из способов:</p>
+<ul>
+<li>на этой же странице нажмите ссылку <strong>«Click here to download»</strong>;</li>
+<li>либо в блоке <strong>Standalone Installer</strong> выберите <strong>Git for Windows ... Setup</strong>;</li>
+</ul>
+<p>Разрядность почти всех современных компьютеров — 64-bit. Проверить: <strong>Параметры → Система → О системе → Тип системы</strong>.</p>
+</li>
+<li>
+<p>Запустите скачанный файл, например, <code>Git-2.45.1-64-bit.exe</code>. Если появится окно контроля учётных записей (UAC) — нажмите <strong>Да</strong>.</p>
+</li>
+<li>
+<p>Пройдите шаги мастера установки. Для большинства пользователей подходят значения по умолчанию, но обратите внимание на несколько экранов:</p>
+<table>
+<thead>
+<tr>
+<th>Экран</th>
+<th>Рекомендация</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Select Components</strong></td>
+<td>Оставьте галочки по умолчанию. Полезно включить <strong>Windows Explorer integration</strong> (пункты «Git Bash Here» / «Git GUI Here»).</td>
+</tr>
+<tr>
+<td><strong>Choosing the default editor used by Git</strong></td>
+<td>Выберите редактор, которым умеете пользоваться. Если не уверены — <strong>Visual Studio Code</strong> (если установлен) или <strong>Блокнот</strong>.</td>
+</tr>
+<tr>
+<td><strong>Adjusting your PATH environment</strong></td>
+<td>Оставьте рекомендованный вариант <strong>Git from the command line and also from 3rd-party software</strong>. Именно он добавляет Git в <code>PATH</code>.</td>
+</tr>
+<tr>
+<td><strong>Choosing HTTPS transport backend</strong></td>
+<td><strong>Use the native Windows Secure Channel library</strong>.</td>
+</tr>
+<tr>
+<td><strong>Configuring the line ending conversions</strong></td>
+<td><strong>Checkout Windows-style, commit Unix-style line endings</strong> (<code>core.autocrlf = true</code>).</td>
+</tr>
+<tr>
+<td>Остальные экраны</td>
+<td>Значения по умолчанию.</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Нажмите <strong>Install</strong> и дождитесь завершения.</p>
+</li>
+<li>
+<p>Откройте <strong>новое</strong> окно PowerShell (или «Командной строки») и проверьте установку:</p>
+<pre class="hljs"><code><div>git <span class="hljs-literal">--version</span>
+</div></code></pre>
+<p>Если в терминале напечаталась версия — установка прошла успешно.</p>
+</li>
+</ol>
+<p>Вместе с Git устанавливается приложение <strong>Git Bash</strong> — эмулятор Unix-терминала. В нём доступны команды <code>git</code>, <code>ssh</code>, <code>ls</code>, <code>cat</code> и другие. Можно пользоваться как им, так и обычным PowerShell.</p>
+<hr>
+<h2 id="macos">macOS</h2>
+<h3 id="вариант-1-homebrew-рекомендуется">Вариант 1. Homebrew (рекомендуется)</h3>
+<p><strong>ВАЖНО:</strong> для этого варианта на компьютере должен быть установлен менеджер пакетов <a href="https://brew.sh/">Homebrew</a>.</p>
+<ol>
+<li>
+<p>Установите Git командой:</p>
+<pre class="hljs"><code><div>brew install git
+</div></code></pre>
+</li>
+<li>
+<p>Homebrew сам добавляет ссылки в <code>PATH</code>. Если после установки команда <code>git</code> по-прежнему указывает на старую версию, добавьте в <code>~/.zshrc</code> строку:</p>
+<pre class="hljs"><code><div><span class="hljs-built_in">export</span> PATH=<span class="hljs-string">&quot;/opt/homebrew/bin:<span class="hljs-variable">$PATH</span>&quot;</span>   <span class="hljs-comment"># Apple Silicon (M1/M2/M3)</span>
+<span class="hljs-built_in">export</span> PATH=<span class="hljs-string">&quot;/usr/local/bin:<span class="hljs-variable">$PATH</span>&quot;</span>      <span class="hljs-comment"># Intel</span>
+</div></code></pre>
+</li>
+<li>
+<p>Перезапустите терминал или выполните <code>source ~/.zshrc</code>, затем проверьте:</p>
+<pre class="hljs"><code><div>git --version
+</div></code></pre>
+</li>
+</ol>
+<h3 id="вариант-2-официальный-установщик">Вариант 2. Официальный установщик</h3>
+<ol>
+<li>Откройте <a href="https://git-scm.com/download/mac">git-scm.com/download/mac</a>. Страница предложит способы установки; при отсутствии Homebrew можно скачать установщик со стороннего зеркала (например, <a href="https://sourceforge.net/projects/git-osx-installer/">sourceforge.net/projects/git-osx-installer</a>).</li>
+<li>Откройте скачанный <code>.dmg</code> и запустите <code>.pkg</code>.</li>
+<li>Если macOS блокирует запуск («не удаётся проверить разработчика»), откройте <strong>Системные настройки → Конфиденциальность и безопасность</strong> и нажмите <strong>Всё равно открыть</strong>.</li>
+<li>Пройдите шаги мастера и проверьте <code>git --version</code> в новом терминале.</li>
+</ol>
+<hr>
+<h2 id="первичная-настройка-git-для-всех-ос">Первичная настройка Git (для всех ОС)</h2>
+<p>После установки укажите имя и почту — они будут подставляться в каждый коммит. Выполните команды, подставив свои данные:</p>
+<pre class="hljs"><code><div>git config --global user.name <span class="hljs-string">&quot;Ivan Ivanov&quot;</span>
+git config --global user.email <span class="hljs-string">&quot;ivan@example.com&quot;</span>
+</div></code></pre>
+<p>Проверить текущие настройки:</p>
+<pre class="hljs"><code><div>git config --list
+</div></code></pre>
+<hr>
+<h2 id="частые-проблемы">Частые проблемы</h2>
+<table>
+<thead>
+<tr>
+<th>Симптом</th>
+<th>Причина</th>
+<th>Решение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>git: command not found</code> / <code>'git' is not recognized</code></td>
+<td>Git не установлен или не добавлен в <code>PATH</code></td>
+<td>Переустановите Git, на экране <strong>Adjusting your PATH</strong> выберите вариант с командной строкой (Windows). На macOS проверьте путь в <code>~/.zshrc</code> и перезапустите терминал</td>
+</tr>
+<tr>
+<td><code>git --version</code> показывает старую версию на macOS</td>
+<td>Используется системный Git от Apple, а не установленный вами</td>
+<td>Убедитесь, что путь Homebrew (<code>/opt/homebrew/bin</code> или <code>/usr/local/bin</code>) стоит в <code>PATH</code> <strong>раньше</strong> <code>/usr/bin</code>; перезапустите терминал</td>
+</tr>
+<tr>
+<td>При <code>git commit</code> открывается непонятный редактор (Vim) и непонятно, как выйти</td>
+<td>Редактором по умолчанию назначен Vim</td>
+<td>Нажмите <code>Esc</code>, введите <code>:q!</code> и <code>Enter</code>. Затем смените редактор: <code>git config --global core.editor &quot;nano&quot;</code> (или <code>&quot;code --wait&quot;</code> для VS Code)</td>
+</tr>
+<tr>
+<td><code>warning: LF will be replaced by CRLF</code> в Windows</td>
+<td>Автоматическая конвертация переводов строк</td>
+<td>Это предупреждение, не ошибка. Оставьте <code>core.autocrlf = true</code> (значение по умолчанию установщика)</td>
+</tr>
+<tr>
+<td>GitHub требует пароль при <code>git push</code>, а обычный пароль не подходит</td>
+<td>GitHub с 2021 года не принимает пароль от аккаунта по HTTPS</td>
+<td>Создайте <strong>Personal Access Token</strong> в настройках GitHub и используйте его вместо пароля, либо настройте доступ по SSH-ключу</td>
+</tr>
+</tbody>
+</table>
+
+</body>
+</html>
