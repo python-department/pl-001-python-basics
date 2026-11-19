@@ -333,7 +333,7 @@ class Converter:
 converter = Converter()
 print(Converter.plain(5))          # 10 -- через класс работает
 print(converter.static(5))         # 10 -- через экземпляр работает
-print(converter.get_class_name())  # Converter -- cls это класс экземпляра
+print(converter.get_class_name())  # Converter -- в cls передан класс экземпляра
 print(converter.plain(5))
 # TypeError: Converter.plain() takes 1 positional argument but 2 were given
 ```
