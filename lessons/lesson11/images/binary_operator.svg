@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1060 590" width="1060" height="590"
+     font-family="'Segoe UI', Arial, sans-serif">
+  <title>Порядок вычисления бинарной операции left + right</title>
+  <defs>
+    <marker id="arrow" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M1 1 L11 6 L1 11" fill="none" stroke="#0070C0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+  </defs>
+
+  <rect width="1060" height="590" fill="#FFFFFF"/>
+
+  <text x="530" y="46" text-anchor="middle" font-size="30" font-weight="700" fill="#0070C0">Порядок вычисления бинарной операции</text>
+
+  <!-- Connectors -->
+  <g fill="none" stroke="#0070C0" stroke-width="2">
+    <!-- expression -> check __add__ -->
+    <path d="M180 140 H228" marker-end="url(#arrow)"/>
+    <!-- no __add__ -> check __radd__ -->
+    <path d="M490 140 H548" marker-end="url(#arrow)"/>
+    <!-- __add__ returned NotImplemented -> check __radd__ -->
+    <path d="M490 460 H520 V140"/>
+    <!-- no __radd__ -> TypeError -->
+    <path d="M810 140 H878" marker-end="url(#arrow)"/>
+    <!-- __radd__ returned NotImplemented -> TypeError -->
+    <path d="M810 460 H845 V140"/>
+    <!-- method exists -> call -->
+    <path d="M360 195 V258" marker-end="url(#arrow)"/>
+    <path d="M680 195 V258" marker-end="url(#arrow)"/>
+    <!-- call -> check returned value -->
+    <path d="M360 340 V403" marker-end="url(#arrow)"/>
+    <path d="M680 340 V403" marker-end="url(#arrow)"/>
+    <!-- returned any other object -> result -->
+    <path d="M360 515 V555 H960 V502" marker-end="url(#arrow)"/>
+    <path d="M680 515 V555"/>
+  </g>
+  <g fill="#0070C0">
+    <circle cx="520" cy="140" r="4"/>
+    <circle cx="845" cy="140" r="4"/>
+    <circle cx="680" cy="555" r="4"/>
+  </g>
+
+  <!-- Expression -->
+  <rect x="20" y="100" width="160" height="80" rx="14" fill="#00558C"/>
+
+  <!-- Left operand -->
+  <g fill="#0070C0" stroke="#00558C" stroke-width="1.5">
+    <polygon points="230,140 360,85 490,140 360,195"/>
+    <rect x="245" y="260" width="230" height="80" rx="14"/>
+    <polygon points="230,460 360,405 490,460 360,515"/>
+  </g>
+
+  <!-- Right operand -->
+  <g fill="#3DB2FF" stroke="#00558C" stroke-width="1.5">
+    <polygon points="550,140 680,85 810,140 680,195"/>
+    <rect x="565" y="260" width="230" height="80" rx="14"/>
+    <polygon points="550,460 680,405 810,460 680,515"/>
+  </g>
+
+  <!-- Outcomes -->
+  <g fill="#BFE4FF" stroke="#00558C" stroke-width="1.5">
+    <rect x="880" y="100" width="160" height="80" rx="14"/>
+    <rect x="880" y="420" width="160" height="80" rx="14"/>
+  </g>
+
+  <!-- Node labels on dark background -->
+  <g text-anchor="middle" font-family="Consolas, 'Courier New', monospace" font-size="19" fill="#FFFFFF">
+    <text x="100" y="147" font-size="21">left + right</text>
+    <text x="360" y="134">у left есть</text>
+    <text x="360" y="159">__add__?</text>
+    <text x="360" y="306">left.__add__(right)</text>
+    <text x="360" y="454">вернул</text>
+    <text x="360" y="479">NotImplemented?</text>
+  </g>
+
+  <!-- Node labels on light background -->
+  <g text-anchor="middle" font-family="Consolas, 'Courier New', monospace" font-size="19" fill="#0A2540">
+    <text x="680" y="134">у right есть</text>
+    <text x="680" y="159">__radd__?</text>
+    <text x="680" y="306">right.__radd__(left)</text>
+    <text x="680" y="454">вернул</text>
+    <text x="680" y="479">NotImplemented?</text>
+    <text x="960" y="147" font-size="21">TypeError</text>
+    <text x="960" y="454">вернуть</text>
+    <text x="960" y="479">результат</text>
+  </g>
+
+  <!-- Branch labels -->
+  <g font-size="18" font-weight="700" fill="#0070C0">
+    <text x="478" y="108">нет</text>
+    <text x="802" y="108">нет</text>
+    <text x="374" y="233">да</text>
+    <text x="694" y="233">да</text>
+    <text x="486" y="486">да</text>
+    <text x="806" y="486">да</text>
+    <text x="374" y="540">нет</text>
+    <text x="694" y="540">нет</text>
+  </g>
+</svg>
